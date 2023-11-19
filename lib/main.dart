@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  const MyHomePage(),
+      home:   Welcome(),
     );
   }
 }
@@ -35,8 +35,6 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-     int count = ref.watch(appCount);
-
     return Scaffold(
       appBar: AppBar(
 
@@ -44,69 +42,23 @@ class MyHomePage extends ConsumerWidget {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
       ),
-      body: Center(
+      body: const Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
 
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             Text(
-              count.toString(),
-              style: Theme.of(context).textTheme.headlineMedium,
+              'You have pushed the button this many times:',
             ),
           ],
         ),
       ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          FloatingActionButton(
-            onPressed: (){
-              ref.read(appCount.notifier).state++;
-            },
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-            heroTag: "inc",
-          ),
-          FloatingActionButton(
-            onPressed: (){
-              ref.read(appCount.notifier).state--;
-            },
-            tooltip: 'Decrement',
-            child: const Icon(Icons.minimize),
-            heroTag: "dec",
-          ),
 
-          FloatingActionButton(
-            onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => Welcome(),));
-            },
-            tooltip: 'SecondPage',
-            child: const Icon(Icons.arrow_right_rounded),
-            heroTag: "secPage",
-          ),
-          
-        ],
-      ) // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
 
-class SecondPage extends StatelessWidget {
-  const SecondPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        child: Text("count value"),
-      ),
-    );
-  }
-}
 

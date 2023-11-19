@@ -1,3 +1,4 @@
+import 'package:ecommerce_riverpod/Pages/sign_in/sign_in.dart';
 import 'package:ecommerce_riverpod/common/utils/app_colors.dart';
 import 'package:ecommerce_riverpod/common/widgets/app_shadow.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,9 @@ Widget appOnboardingPage({String imagePath = "",
   required String title,
   required String subTitle,
   required PageController controller,
-  index = 0}) {
+  index = 0,
+  required BuildContext context
+}) {
   return Column(
     children: [
       Image.asset(
@@ -27,18 +30,20 @@ Widget appOnboardingPage({String imagePath = "",
             size: 16,
             textColor: AppColors.primarySecondaryElementText),
       ),
-      _nextButton(index, controller),
+      _nextButton(index, controller, context),
     ],
   );
 }
 
-Widget _nextButton(int index, PageController controller) {
+Widget _nextButton(int index, PageController controller , BuildContext context) {
   return GestureDetector(
       onTap: ()
   {
     if (index < 3) {
       controller.animateToPage(index++,
-          duration: Duration(milliseconds: 400), curve: Curves.easeIn);
+          duration: Duration(milliseconds: 100), curve: Curves.easeIn);
+    }else{
+      Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn(),));
     }
   },
   child: Container(
